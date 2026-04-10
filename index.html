@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shinchan Speedtest</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{margin:0;font-family:Arial;background:linear-gradient(135deg,#ff3c3c,#ffd000);text-align:center;color:white;}
+button{padding:15px 25px;border:none;border-radius:10px;background:black;color:white;margin-top:20px;}
+</style>
+</head>
+<body>
+
+<h1>⚡ Shinchan Speedtest ⚡</h1>
+<img src="https://i.imgur.com/2DhmtJ4.png" width="120">
+
+<p>Download: <span id="d">-</span></p>
+<p>Upload: <span id="u">-</span></p>
+<p>Ping: <span id="p">-</span></p>
+
+<button onclick="start()">START</button>
+
+<script>
+function start(){
+let s=Date.now();
+fetch("https://www.google.com/favicon.ico").then(()=>p.innerText=Date.now()-s);
+
+let d=Date.now();
+fetch("https://speed.hetzner.de/10MB.bin").then(r=>r.blob()).then(()=>{
+d=(80/((Date.now()-d)/1000)).toFixed(2);
+document.getElementById("d").innerText=d;
+});
+
+let u=Date.now();
+fetch("https://httpbin.org/post",{method:"POST",body:new Blob([new ArrayBuffer(3e6)])})
+.then(()=>{
+u=(24/((Date.now()-u)/1000)).toFixed(2);
+document.getElementById("u").innerText=u;
+});
+}
+</script>
+
+</body>
+  </html>
